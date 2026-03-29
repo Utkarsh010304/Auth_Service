@@ -71,6 +71,26 @@ class UserService{
         }
     }
 
+    async isAuthenticated(token){
+        try{
+            const isTokenVerified = this.verifyToken(token);
+            if(!isTokenVerified) {
+                thorw: {error: "Invalid token"}
+            }
+            const user =this.userRepository.getById(isTokenVerified);
+            if(!user) {
+                throw{error: "No user with corresponding token exists"};
+            }
+            return user.id;
+        }
+        catch(error){
+            console.log("Something went wrong in authentication");
+            throw error;
+        }
+    }
+
+
+
     
 }
 
