@@ -73,11 +73,11 @@ class UserService{
 
     async isAuthenticated(token){
         try{
-            const isTokenVerified = this.verifyToken(token);
-            if(!isTokenVerified) {
+            const response = this.verifyToken(token);
+            if(!response) {
                 thorw: {error: "Invalid token"}
             }
-            const user =this.userRepository.getById(isTokenVerified);
+            const user =await this.userRepository.getById(response.id);
             if(!user) {
                 throw{error: "No user with corresponding token exists"};
             }

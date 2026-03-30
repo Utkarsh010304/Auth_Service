@@ -17,5 +17,5 @@ router.post(
 
 router.get('./isAuthenticated',UserController.isAuthenticated);
 
-router.get('/dummy')
+
 module.exports= router;
