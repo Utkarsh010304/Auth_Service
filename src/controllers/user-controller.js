@@ -69,8 +69,30 @@ const isAuthenticated =async(req,res) => {
         });
     }
 }
+
+const isAdnin = async(req,res) =>{
+    try{
+        const response =await UserService.isAdnin(req.body.id);
+        return res.status(200).json({
+            err:{},
+            data: response,
+            message: 'Successfully fetched user is admin or not',
+            success: true
+        });
+    }
+    catch(error){
+        console.log(error);
+        return res.status(500).json({
+            message: "Something went wrong User not genuine",
+            success:false,
+            err: error,
+            data: {}
+        });
+    }
+}
 module.exports={
     create, 
     signIn,
-    isAuthenticated
+    isAuthenticated,
+    isAdnin
 }
